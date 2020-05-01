@@ -2,7 +2,7 @@ import React from 'react';
 import EventListFilters from './EventListFilters';
 import { NavLink } from 'react-router-dom';
 import EventImageSlider from './EventImageSlider';
-import EventList from './PublicEventList';
+import PublicEventList from './PublicEventList';
 import { Container, Row, Col } from 'reactstrap';
 
 
@@ -35,7 +35,7 @@ const EventHomePage = () => (
             </div>
             <Row>
                 <Col xs="12"><EventListFilters /></Col>
-                <Col xs="12"><EventList /></Col>
+                <Col xs="12"><PublicEventList /></Col>
             </Row>
         </Container>
     </div>

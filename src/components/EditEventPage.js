@@ -5,7 +5,8 @@ import { startEditEvent } from '../actions/events';
 import { startRemoveEvent } from '../actions/events';
 import { WhatsappShareButton, WhatsappIcon, FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon } from 'react-share';
 import LoggedInHeader from './LoggedInHeader';
-
+import { Container, Row, Col } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 export class EditEventPage extends React.Component {
     onSubmit = (event) => {
@@ -20,16 +21,24 @@ export class EditEventPage extends React.Component {
         return (
             <div>
                 <LoggedInHeader />
+                <Container>
                 <EventForm
                     event={this.props.event}
                     onSubmit={this.onSubmit}
                 />
-                <button onClick={this.onRemove}>Remove</button>
-                <div>
+                
+               
+                <Col m={{ size: 6, order: 2 }}>
+                    <Button onClick={this.onRemove} className="input-field__padder" color="danger">Remove</Button>
+                </Col>
+                <Col sm={{ size: 'auto', offset: 4 }}>  
+                    <div>
                     <FacebookShareButton children={<FacebookIcon />} url={`http://eventstop.herokuapp.com/edit/${this.props.event.id}`}/>
                     <WhatsappShareButton children={<WhatsappIcon />} url={`http://eventstop.herokuapp.com/edit/${this.props.event.id}`}/>
                     <TwitterShareButton children={<TwitterIcon />} url={`http://eventstop.herokuapp.com/edit/${this.props.event.id}`}/>
-                </div>
+                    </div>
+                </Col>
+                </Container>    
                
             </div>
         )

@@ -4,6 +4,8 @@ import { SingleDatePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 import TimeKeeper from 'react-timekeeper';
 import Switch from "react-switch";
+import { Container, Row, Col } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 // Always use Moment for dates.
 const now = moment(); // We get back an instance of moment (an individual moment).
@@ -94,11 +96,16 @@ export default class EventForm extends React.Component {
     render() {
         
         return (
+            
             <div>
                 {this.state.error && <p>{this.state.error}</p>}
                 <form onSubmit={this.onSubmit}>
+            <Row>
+                <Col>
                 <div>
+                <h1>Event Title</h1>
                 <input
+                    className="input-field-title"
                     type="text"
                     placeholder="Title"
                     autoFocus
@@ -106,8 +113,11 @@ export default class EventForm extends React.Component {
                     onChange={this.onDescriptionChange}
                 />
                 </div>
+                
                 <div>
+                <h1>Ticket Price</h1>
                 <input
+                    className="input-field-price"
                     type="number"
                     placeholder="Entry Cost"
                     value={this.state.amount}
@@ -115,7 +125,35 @@ export default class EventForm extends React.Component {
 
                 />
                 </div>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                <h1>Event Description</h1>
+                <textarea
+                    className="input-field-description"
+                    placeholder="Add a description for your event."
+                    value={this.state.note}
+                    onChange={this.onNoteChange}
+                >
+                </textarea>
+                </Col>
+            </Row>
+            <Row>
+            <Col>
                 <div>
+                <h1>Event Time</h1>
+                <TimeKeeper
+                    time={this.state.time}
+                    onChange={this.onTimeChange}
+                    switchToMinuteOnHourSelect={true}
+                    
+                />
+                </div>
+            </Col>
+            <Col>
+                <div>
+                <h1>Event Date</h1>
                 <SingleDatePicker 
                     date={this.state.createdAt}
                     onDateChange={this.onDateChange}
@@ -125,27 +163,20 @@ export default class EventForm extends React.Component {
                     isOutsideRange={() => false}
                 />
                 </div>
+                </Col>
+            </Row>
+           
+            <Row>
+                <Col>
+                <h2 className="input-field-public">Is this a Public Event?</h2>
                 <div>
-                <TimeKeeper
-                    time={this.state.time}
-                    onChange={this.onTimeChange}
-                    switchToMinuteOnHourSelect={true}
-                    
-                />
-                </div>
-                <div>
-                <textarea
-                    placeholder="Add a description for your event."
-                    value={this.state.note}
-                    onChange={this.onNoteChange}
-                >
-                </textarea>
-                </div>
-                <p>Is this a Public Event?</p>
                 <Switch 
                     checked={this.state.checked}   
                     onChange={this.handleChange} 
                 />
+                </div>
+                </Col>
+            </Row>
                 {/* <TimePicker 
                     hourPlaceholder="hh"
                     minutePlaceholder="mm"
@@ -153,12 +184,15 @@ export default class EventForm extends React.Component {
                     onChange={this.onTimeChange}
                     value={this.state.time}
                 /> */}
-                
-                <button>
-                    Add Event
-                </button>
+                <Col m={{ size: 6, order: 1 }}>
+                <Button className="input-field__padder" color="info">
+                    Finish
+                </Button>
+                </Col>
+               
                 </form>
             </div>
+        
         )
     }
 };

@@ -14,15 +14,15 @@ import {
 const EventListItem = ({ id, description, amount, createdAt, time }) => (
     <div>
     <Card>
-        <CardImg top width="52%" src="/images/6.jpg" alt="Card image cap" />
+        <CardImg top width="52%" src="/images/p_holder.png" alt="Card image cap" />
         <CardBody>
           <CardTitle><p>{description}</p></CardTitle>
           <CardSubtitle><p>{moment(createdAt).format("ddd, MMM  DD, YYYY")}, {time}</p></CardSubtitle>
           <CardText>{numeral(amount / 100).format('$0,0.00')}</CardText>
-          <Button href={`/edit/${id}`}>Button</Button>
+          
         </CardBody>
         <CardFooter>
-        <Button>Buy Tickets</Button>
+        <Button href={`/edit/${id}`}>Edit Event</Button>
         </CardFooter>
       </Card>
 

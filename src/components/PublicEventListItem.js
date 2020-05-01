@@ -11,12 +11,11 @@ import {
 const PublicEventListItem = ({ id, description, amount, createdAt, time }) => (
     <div>
     <Card>
-        <CardImg top width="52%" src="/images/6.jpg" alt="Card image cap" />
+        <CardImg top width="52%" src="/images/p_holder.png" alt="Card image cap" />
         <CardBody>
           <CardTitle><p>{description}</p></CardTitle>
           <CardSubtitle><p>{moment(createdAt).format("ddd, MMM  DD, YYYY")}, {time}</p></CardSubtitle>
-          <CardText>{numeral(amount / 100).format('$0,0.00')}</CardText>
-          <Button href={`/view/${id}`}>Button</Button>
+          <CardText>Cost Per Ticket {numeral(amount / 100).format('$0,0.00')}</CardText>
         </CardBody>
         <CardFooter>
         <Button>Buy Tickets</Button>
