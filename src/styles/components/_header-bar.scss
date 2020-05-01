@@ -1,0 +1,45 @@
+.header-bar {
+    background: #fff;
+    height: 50px;
+    padding-left: 2.5vw;
+    padding-right: 2.5vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 0 5px rgba(0,0,0,.13);
+    position: fixed;
+    width: 100%;
+
+}
+
+@media only screen and (min-width: 770px) {
+    .header-bar__fix {
+        top: 2.25rem;
+    }
+}
+
+.header-bar__nav_link {
+    
+    color: #807a7d;
+    text-align: center;
+    padding: 0 1.1rem 0 1.1rem;
+    text-decoration: none;
+    font-size: 1.9rem;
+    font-weight: 500;
+    border-radius: 2.5rem;
+    cursor: pointer;
+    margin-right: 5vw;
+
+}
+
+.header-bar__nav_link_button {
+    background: $button-blue;
+    color: #fff;
+    letter-spacing: 0.07rem;
+    border-radius: 1.5rem;
+    margin: auto;
+    padding: 0.5rem 2.5rem 1rem 2.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    border-style: none;
+}
