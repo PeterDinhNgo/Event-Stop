@@ -26,7 +26,11 @@ const EventHomePage = () => (
                     <h1 className="image-slider__herotext">Schedule events and find public events to attend</h1>
                     <p className="image-slider__herotext__underneath">Choose a day, choose a time and make it public or private.</p>
                 </Col>
-                <Col xs="8"><div className = 'image-slider'><EventImageSlider /></div></Col>
+                <Col xs="8">
+                
+                <div className = 'image-slider'><EventImageSlider /></div>
+                
+                </Col>
             </Row>
             </div>
             <Row>

@@ -66,7 +66,7 @@ export class SignUpPage extends React.Component {
     //     }
     // };
     recaptchaLoaded(){
-        console.log('captcha successfully loaded')
+        console.log('')
     }
 
     render() {
