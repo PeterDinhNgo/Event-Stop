@@ -13,7 +13,6 @@ import { firebase } from './firebase/firebase';
 import history from "./history";
 import { LoadingSpinner } from './components/LoadingSpinner';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const store = configureStore();
 
