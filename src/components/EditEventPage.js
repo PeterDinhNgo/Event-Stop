@@ -4,9 +4,10 @@ import EventForm from './EventForm';
 import { startEditEvent } from '../actions/events';
 import { startRemoveEvent } from '../actions/events';
 import { WhatsappShareButton, WhatsappIcon, FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon } from 'react-share';
-import LoggedInHeader from './LoggedInHeader';
+import Header from './Header';
 import { Container, Row, Col } from 'reactstrap';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+
 
 export class EditEventPage extends React.Component {
     onSubmit = (event) => {
@@ -20,13 +21,13 @@ export class EditEventPage extends React.Component {
     render() {
         return (
             <div>
-                <LoggedInHeader />
+                <Header />
                 <Container>
                 <EventForm
                     event={this.props.event}
                     onSubmit={this.onSubmit}
                 />
-                
+               
                
                 <Col m={{ size: 6, order: 2 }}>
                     <Button onClick={this.onRemove} className="input-field__padder" color="danger">Remove</Button>

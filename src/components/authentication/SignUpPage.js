@@ -5,6 +5,7 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Alert } from 'reactstrap';
 import { Badge } from 'reactstrap';
 import Recaptcha from 'react-recaptcha';
+import Cookies from 'js-cookie';
 
 export class SignUpPage extends React.Component {
     constructor(props){
@@ -19,10 +20,13 @@ export class SignUpPage extends React.Component {
             isVerified: false
         };
     }
+
+
     
     handleSubscribe = (e) => {
         e.preventDefault();
         if (this.state.isVerified) {
+            Cookies.set('emailRemember', this.state.email , { expires: 3});
             this.props.signUp(this.state);
         } else {
             alert('Please verify that you are human!');
@@ -47,6 +51,7 @@ export class SignUpPage extends React.Component {
         e.preventDefault();
         if (this.state.authcheck){
             if (this.props.authError === null) {
+                Cookies.set('emailRemember', {email: this.state.email}, { expires: 3});
                 this.props.signUp(this.state);
             }
         }

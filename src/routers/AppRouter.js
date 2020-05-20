@@ -14,9 +14,12 @@ import HeroHomePage from '../components/HeroHomePage';
 import LoggedInHome from '../components/LoggedInHome';
 import VerificationLand from '../components/VerificationLand';
 import PublicEventPage from '../components/PublicEventPage'
+import UserProfile from '../components/UserProfile';
 
 const AppRouter = () => (
+    
     <Router history={history}>
+        
         <div>
             <Switch>
                 <PublicRoute path="/" component={HeroHomePage} exact={true} />
@@ -29,10 +32,12 @@ const AppRouter = () => (
                 <PrivateRoute path="/create" component={AddEventPage}/>
                 <PrivateRoute path="/edit/:id" component={EditEventPage}/>
                 <PublicRoute path="/view/:id" component={PublicEventPage}/>
+                <PrivateRoute path="/user_profile" component={UserProfile} />
                 <Route component={NotFoundPage}/>
             </Switch>
         </div>
     </Router>
+    
 );
 
 

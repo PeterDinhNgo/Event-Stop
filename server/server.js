@@ -11,6 +11,10 @@ app.get('*', (req, res) => { // request object'req' and response object'res
     res.sendFile(path.join(publicPath, 'index.html'));
 }); //function to run when someone makes a get request to our server.
 
+
+// Axios AJAX
+
+
 app.listen(port, () => {
     console.log('Server is up!');
 });

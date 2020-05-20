@@ -5,10 +5,12 @@ import history from "../../history";
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { Alert } from 'reactstrap';
 import { Badge } from 'reactstrap';
+import Cookies from 'js-cookie';
+
 
 export class SignInPage extends React.Component {
     state = {
-        email: '',
+        email: Cookies.get('emailRemember') ? Cookies.get('emailRemember') : '',
         password: ''
     }
     handleChange = (e) => {
@@ -35,11 +37,11 @@ export class SignInPage extends React.Component {
                 <h1><Badge color="primary">Sign In</Badge></h1>
                 <FormGroup>
                     <Label for="email">Email</Label>
-                    <Input type="email" name="email" id="email" placeholder="Enter Your Email" onChange={this.handleChange}/>
+                    <Input type="email" name="email" id="email" value={this.state.email !== '' ? this.state.email : null} placeholder="Enter Your Email" onChange={this.handleChange}/>
                 </FormGroup>
                 <FormGroup>
                     <Label for="password">Password</Label>
-                    <Input type="password" name="password" id="password" placeholder="Choose a Password" onChange={this.handleChange}/>
+                    <Input type="password" name="password" id="password" placeholder="Enter Your Password" onChange={this.handleChange}/>
                 </FormGroup>
                 
                 <Button color="primary" >Sign In</Button>

@@ -1,5 +1,7 @@
 import uuid from 'uuid';
 import database from '../firebase/firebase';
+import { storage } from '../firebase/firebase';
+
 
 // component calls action generator
 // action generator returns object
@@ -25,17 +27,31 @@ export const startAddEvent = (eventData = {}) => {
         amount = 0,
         createdAt = 0,
         time = '',
-        public_event = false
+        public_event = false,
+        picture = '',
+        pictureUrl = ''
       } = eventData;
-      const event = { description, note, amount, createdAt, time, public_event };
+      const event = { description, note, amount, createdAt, time, public_event, picture, pictureUrl };
       
       if (event.public_event === true) {
-        return database.ref(`public_events`).push(event) && database.ref(`users/${uid}/events`).push(event).then((ref) => {
-          dispatch(addEvent({
-            id: ref.key,
-            ...event
-          }));
+        storage.child(`users/${uid}/${createdAt}`).put(picture).then((snapshot) => {
+          //console.log('Uploaded a blob or file!');
+          const imgurl = snapshot.metadata.downloadURLs[0];
+          //console.log(imgurl);
+          event.pictureUrl = imgurl;
+
+          return database.ref(`public_events`).push(event) && database.ref(`users/${uid}/events`).push(event).then((ref) => {
+
+            dispatch(addEvent({
+              id: ref.key,
+              ...event
+            }));
+          }).catch((e) => {
+            console.log(e);
+          })
+
         });
+
       } else {
           return database.ref(`users/${uid}/events`).push(event).then((ref) => {
               dispatch(addEvent({

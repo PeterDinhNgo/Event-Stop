@@ -8,32 +8,7 @@ import { NavLink } from 'react-router-dom';
 
 const LoggedInHome = () => (
     
-    
-    // <Container>
-    //     <Row>
-    //         <Col xs="12">
-    //             <LoggedInHeader />
-    //         </Col>
-    //     </Row>   
-    //     <Row>
-    //          <Col xs="4">
-    //             <h1 className="image-slider__herotext">Schedule events and find public events to attend</h1>
-    //             <p className="image-slider__herotext__underneath">Choose a day, choose a time and make it public or private.</p>
-    //         </Col>
-    //         <Col xs="8"><div className = 'image-slider'><EventImageSlider /></div></Col>
-    //     </Row>
-    //     <Row>
-    //         <Col>
-    //             <EventListFilters />
-    //         </Col>
-    //     </Row>
-    //     <Row>
-    //         <Col>
-    //             <EventList /> 
-    //         </Col>
-    //     </Row>   
-    // </Container>
-    <div >
+    <div>
         <Container className="themed-container" fluid={true}>
             
                 <LoggedInHeader />
@@ -52,6 +27,7 @@ const LoggedInHome = () => (
                 <Col xs="12"><EventList /></Col>
             </Row>
         </Container>
+        
     </div>
     
 );

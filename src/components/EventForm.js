@@ -5,8 +5,10 @@ import 'react-dates/lib/css/_datepicker.css';
 import TimeKeeper from 'react-timekeeper';
 import Switch from "react-switch";
 import { Container, Row, Col } from 'reactstrap';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-
+import { Button, Form, FormGroup, Label, Input, FormText, CustomInput } from 'reactstrap';
+import PreviewPicture from './PreviewPicture';
+import Dropzone from 'react-dropzone-uploader';
+import 'react-dropzone-uploader/dist/styles.css';
 // Always use Moment for dates.
 const now = moment(); // We get back an instance of moment (an individual moment).
 console.log(now.format('Do MMMM YYYY'))
@@ -24,10 +26,43 @@ export default class EventForm extends React.Component {
                 error: '',
                 time:  props.event ? props.event.time: '12:00am',
                 checked: true,
-                public_event: props.event ? props.event.public_event : true
+                public_event: props.event ? props.event.public_event : true,
+                picture: props.event? props.event.picture : null,
+                pictureUrl: props.event? props.event.pictureUrl : null
         };
     }
      // State Object
+    handleChangeStatus = ({ meta, file }, status) => { 
+        console.log(status, meta, file)     
+    }
+    
+    handleSubmit = (files) => {
+        console.log(files[0].file);
+        const reader = new FileReader();
+        const bobby = files[0].file;
+        
+        reader.onloadend = () => {
+            this.setState({
+                picture: bobby,
+                pictureUrl: reader.result
+            })
+        }
+        reader.readAsDataURL(bobby);
+    }
+
+     displayPicture = (e) => {
+        const reader = new FileReader();
+        const file = e.target.files[0];
+        console.log(file);
+        reader.onloadend = () => {
+            this.setState({
+                picture: file,
+                pictureUrl: reader.result
+            });
+        };
+        
+        reader.readAsDataURL(file);
+    }
 
     onDescriptionChange = (e) => {
         const description = e.target.value;
@@ -88,13 +123,15 @@ export default class EventForm extends React.Component {
                 createdAt: this.state.createdAt.valueOf(),
                 note: this.state.note,
                 time: this.state.time,
-                public_event: this.state.public_event
+                public_event: this.state.public_event,
+                picture: this.state.picture,
+                pictueUrl: this.state.pictureUrl
             });
         }
     };
 
     render() {
-        
+        const { label, required, input } = this.props;
         return (
             
             <div>
@@ -189,8 +226,40 @@ export default class EventForm extends React.Component {
                     Finish
                 </Button>
                 </Col>
-               
+                  
                 </form>
+                <FormGroup>
+                    <Label for="exampleCustomFileBrowser">File Browser</Label>
+                    <CustomInput 
+                        type="file" 
+                        id="exampleCustomFileBrowser" 
+                        name="customFile" 
+                        {...input}
+                        onChange={(e) => {this.displayPicture(e);}}
+                    />
+                    <PreviewPicture 
+                            pictureUrl = {this.state.pictureUrl}
+                    />
+                </FormGroup>
+                {/* <Row>
+                    <div class="input-group mb-3">
+                        <input 
+                            type="file" 
+                            className="form-control" 
+                            {...input}
+                            onChange={(e) => {this.displayPicture(e);}} 
+                        />
+                        <PreviewPicture 
+                            pictureUrl = {this.state.pictureUrl}
+                        />
+                    </div>
+                </Row> */}
+                <Dropzone 
+                    onChangeStatus={this.handleChangeStatus}
+                    onSubmit={this.handleSubmit}
+                    accept="image/*"
+                />
+                
             </div>
         
         )

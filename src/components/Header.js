@@ -9,7 +9,7 @@ export const Header = ({ startLogout }) => (
         <Col s={{ size: '7', order: 1}} ><h1 className="page-title">Event Stop</h1></Col>
         <Col s={{ size: 'auto', order: 2}}>
 
-        <a href="/signed_in/home"><button className="button">Event Dashboard</button></a>
+            <NavLink to="/dashboard"><button className="button">Event Dashboard</button></NavLink>
             <NavLink to="/create"><button className="button">Create Event</button></NavLink>
             <button onClick={ startLogout } className="button">Logout</button>
         </Col> 

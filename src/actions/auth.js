@@ -23,8 +23,6 @@ export const startLogout = () => {
     };
 };
 
-
-
 // Email and Password Sign-In
 export const signIn = (credentials) => { 
     return (dispatch, getState) => {
@@ -34,11 +32,9 @@ export const signIn = (credentials) => {
         ).then(() => {
             var user = firebase.auth().currentUser;
             if (!user.emailVerified) {
-                
                 dispatch({type: 'LOGIN_SUCCESS'})
             }
         }).catch((err) => {
-            
             dispatch({type: 'LOGIN_ERROR', err})
         })
     }
@@ -58,13 +54,3 @@ export const signUp = (newUser) => {
         })
     }
 }
-
-
-// export const logUser = (user) => {
-//     var ref = firebase.database().ref("users");
-//     var obj = {
-//         "firstName": user.firstName,
-//         "lastName": user.lastName
-//     };
-//     ref.push(obj);
-// };
