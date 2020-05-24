@@ -26,17 +26,39 @@ export const startLogout = () => {
 // Email and Password Sign-In
 export const signIn = (credentials) => { 
     return (dispatch, getState) => {
-        firebase.auth().signInWithEmailAndPassword(
-            credentials.email,
-            credentials.password
-        ).then(() => {
-            var user = firebase.auth().currentUser;
-            if (!user.emailVerified) {
-                dispatch({type: 'LOGIN_SUCCESS'})
-            }
-        }).catch((err) => {
-            dispatch({type: 'LOGIN_ERROR', err})
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
+            firebase.auth().signInWithEmailAndPassword(
+                credentials.email,
+                credentials.password
+            ).then(() => {
+                var user = firebase.auth().currentUser;
+                if (!user.emailVerified) {
+                    dispatch({type: 'LOGIN_SUCCESS'})
+                }
+            }).catch((err) => {
+                dispatch({type: 'LOGIN_ERROR', err})
+            })
         })
+        
+    }
+}
+
+export const signInNoRemember = (credentials) => { 
+    return (dispatch, getState) => {
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).then(() => {
+            firebase.auth().signInWithEmailAndPassword(
+                credentials.email,
+                credentials.password
+            ).then(() => {
+                var user = firebase.auth().currentUser;
+                if (!user.emailVerified) {
+                    dispatch({type: 'LOGIN_SUCCESS'})
+                }
+            }).catch((err) => {
+                dispatch({type: 'LOGIN_ERROR', err})
+            })
+        })
+        
     }
 }
 

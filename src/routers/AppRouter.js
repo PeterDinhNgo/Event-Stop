@@ -15,6 +15,10 @@ import LoggedInHome from '../components/LoggedInHome';
 import VerificationLand from '../components/VerificationLand';
 import PublicEventPage from '../components/PublicEventPage'
 import UserProfile from '../components/UserProfile';
+import TicketPage from '../components/TicketPage';
+import PublicEventInfo from '../components/publicEvents/PublicEventInfo';
+import ForgotPassword from '../components/authentication/ForgotPassword';
+import EditPublicEventPage from '../components/publicEvents/EditPublicEventPage';
 
 const AppRouter = () => (
     
@@ -22,11 +26,16 @@ const AppRouter = () => (
         
         <div>
             <Switch>
+                
                 <PublicRoute path="/" component={HeroHomePage} exact={true} />
                 <PublicRoute path="/create_account" component={CreateAccountPage}/>
                 <PublicRoute path="/verify" component={VerificationLand} />
                 <PublicRoute path="/signin" component={LoginPage} exact={true} />
+                <PublicRoute path="/forgot" component={ForgotPassword} />
                 
+                <PrivateRoute path="/viewer/:id" component={EditPublicEventPage} />
+                <PrivateRoute path="/public_event/:id" component={PublicEventInfo} />
+                <PrivateRoute path="/ticket" component={TicketPage} />
                 <PrivateRoute path="/signed_in/home" component={LoggedInHome} />
                 <PrivateRoute path="/dashboard" component={EventHomePage} />
                 <PrivateRoute path="/create" component={AddEventPage}/>

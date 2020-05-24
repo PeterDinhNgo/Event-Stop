@@ -2,14 +2,25 @@
 @import './base/base';
 @import './components/hero-layout';
 @import './components/button';
-@import './components/page-title';
+
+/* General */
+@import "~bootstrap/scss/bootstrap";
+
+/* Sections */
 @import './components/header-bar';
+@import './components/page-title';
 @import './components/content-container';
 @import './components/Image-slider';
+@import './components/event-modal';
+
+
+/* Pages */
 @import './components/home';
-@import './components/signup-spacing';
-@import './components/font-size';
-@import './components/packing';
-@import './components/input-field';
+
+/* Fields */
 @import './components/filter-text';
+@import './components/font-size';
+@import './components/input-field';
 @import './components/squeeze';
+@import './components/signup-spacing';
+@import './components/packing';

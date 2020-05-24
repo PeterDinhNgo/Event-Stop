@@ -50,7 +50,7 @@ class EventImageSlider extends React.Component {
         <div>
 
             <Col>
-            <UncontrolledCarousel items={images} autoPlay={false}/>;
+            <UncontrolledCarousel items={images} autoPlay={false}/>
     
             </Col>
         </div>

@@ -6,11 +6,16 @@ import { Alert } from 'reactstrap';
 import { Badge } from 'reactstrap';
 import Recaptcha from 'react-recaptcha';
 import Cookies from 'js-cookie';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+toast.configure();
 
 export class SignUpPage extends React.Component {
     constructor(props){
         super(props)
-    
+
         this.handleSubscribe = this.handleSubscribe.bind(this);
         this.verifyCallback = this.verifyCallback.bind(this);
 
@@ -29,7 +34,7 @@ export class SignUpPage extends React.Component {
             Cookies.set('emailRemember', this.state.email , { expires: 3});
             this.props.signUp(this.state);
         } else {
-            alert('Please verify that you are human!');
+            toast('Please verify that you are human', { type: 'warning', position: "top-center"});
         }
     }
 
@@ -57,21 +62,8 @@ export class SignUpPage extends React.Component {
         }
     }
 
-    // handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     if (this.state.isVerified){
-    //         if (this.props.authError) {
-    //             console.log(this.props.authError)
-    //         } else if (this.props.authError === null) {
-    //             this.props.signUp(this.state);
-    //             alert('Please verify your email in order to signin.')
-    //         } 
-    //     } else {
-    //         alert('Please verify that you are human');
-    //     }
-    // };
     recaptchaLoaded(){
-        console.log('')
+        //console.log('')
     }
 
     render() {

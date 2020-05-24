@@ -6,13 +6,19 @@ import configureStore from './store/configureStore';
 import { startSetEvents, startAddEvent, startSetPublicEvents, setPublicEvents } from './actions/events';
 import { login, logout } from './actions/auth';
 import selectEvents from './selectors/selectEvents';
-import 'normalize.css/normalize.css';
-import './styles/styles.scss';
 import 'react-dates/lib/css/_datepicker.css';
 import { firebase } from './firebase/firebase';
 import history from "./history";
 import { LoadingSpinner } from './components/LoadingSpinner';
+import 'normalize.css/normalize.css';
+import './styles/styles.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
+toast.configure();
+
 
 const store = configureStore();
 
@@ -36,6 +42,7 @@ firebase.auth().onAuthStateChanged((user) => {
     if (user) { 
         if(!user.emailVerified){
             alert('Please verify your email. You will be redirected home.')
+            toast('Check your inbox for the verification email.', { type: 'success', position: "top-center"});
             firebase.auth().signOut();
             store.dispatch(startSetPublicEvents());
         } else {

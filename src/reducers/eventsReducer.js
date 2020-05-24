@@ -27,7 +27,8 @@ const eventsReducer = (state = eventsReducerDefaultState, action) => {
         case 'SET_EVENTS':
             return action.events;  
         case 'SET_PUBLIC_EVENTS':
-            return action.events;        
+            return action.publicEvents;
+
         default:
             return state;
     }

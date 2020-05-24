@@ -20,3 +20,12 @@
 .home__spacing {
     justify-content: center;
 }
+
+@include media-breakpoint-up(xl){
+    .home_container {
+        
+        margin-right: 50px;
+        margin-left: 50px;
+        max-width: 1300px;
+    }
+}

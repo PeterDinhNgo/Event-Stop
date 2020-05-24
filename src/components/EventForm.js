@@ -13,6 +13,7 @@ import 'react-dropzone-uploader/dist/styles.css';
 const now = moment(); // We get back an instance of moment (an individual moment).
 console.log(now.format('Do MMMM YYYY'))
 
+
 export default class EventForm extends React.Component {
     constructor(props) {
         super(props);
@@ -33,11 +34,11 @@ export default class EventForm extends React.Component {
     }
      // State Object
     handleChangeStatus = ({ meta, file }, status) => { 
-        console.log(status, meta, file)     
+        //console.log(status, meta, file)     
     }
     
     handleSubmit = (files) => {
-        console.log(files[0].file);
+        //console.log(files[0].file);
         const reader = new FileReader();
         const bobby = files[0].file;
         
@@ -53,7 +54,7 @@ export default class EventForm extends React.Component {
      displayPicture = (e) => {
         const reader = new FileReader();
         const file = e.target.files[0];
-        console.log(file);
+        //console.log(file);
         reader.onloadend = () => {
             this.setState({
                 picture: file,
@@ -105,7 +106,8 @@ export default class EventForm extends React.Component {
         this.state.public_event = checked
         //console.log(this.state.public_event)
     }
-   
+
+
 
     // Setting up the handler
     onSubmit = (e) => {
@@ -136,9 +138,23 @@ export default class EventForm extends React.Component {
             
             <div>
                 {this.state.error && <p>{this.state.error}</p>}
+                <Row>
+                <PreviewPicture pictureUrl = {this.state.pictureUrl}/>
+                <Dropzone 
+                    onChangeStatus={this.handleChangeStatus}
+                    onSubmit={this.handleSubmit}
+                    accept="image/*"
+                    
+                    inputContent="Drag and Drop an Event Image"
+                    styles={{
+                        dropzone: { width: 400, height: 250 },
+                        dropzoneActive: { borderColor: 'green' },
+                    }}
+                />
+            </Row>
                 <form onSubmit={this.onSubmit}>
             <Row>
-                <Col>
+                <Col sm={{size: 12, offset: 2}} md={{size: 12, offset: 3 }} lg={{size: 12, offset: 4}}>
                 <div>
                 <h1>Event Title</h1>
                 <input
@@ -165,7 +181,7 @@ export default class EventForm extends React.Component {
                 </Col>
             </Row>
             <Row>
-                <Col>
+                <Col lg={{size: 12, offset: 4}}>
                 <h1>Event Description</h1>
                 <textarea
                     className="input-field-description"
@@ -176,6 +192,8 @@ export default class EventForm extends React.Component {
                 </textarea>
                 </Col>
             </Row>
+            
+            
             <Row>
             <Col>
                 <div>
@@ -228,7 +246,7 @@ export default class EventForm extends React.Component {
                 </Col>
                   
                 </form>
-                <FormGroup>
+                <div>
                     <Label for="exampleCustomFileBrowser">File Browser</Label>
                     <CustomInput 
                         type="file" 
@@ -240,7 +258,7 @@ export default class EventForm extends React.Component {
                     <PreviewPicture 
                             pictureUrl = {this.state.pictureUrl}
                     />
-                </FormGroup>
+                </div>
                 {/* <Row>
                     <div class="input-group mb-3">
                         <input 
@@ -254,11 +272,7 @@ export default class EventForm extends React.Component {
                         />
                     </div>
                 </Row> */}
-                <Dropzone 
-                    onChangeStatus={this.handleChangeStatus}
-                    onSubmit={this.handleSubmit}
-                    accept="image/*"
-                />
+                
                 
             </div>
         

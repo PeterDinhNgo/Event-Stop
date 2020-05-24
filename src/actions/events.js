@@ -53,12 +53,16 @@ export const startAddEvent = (eventData = {}) => {
         });
 
       } else {
-          return database.ref(`users/${uid}/events`).push(event).then((ref) => {
+          storage.child(`users/${uid}/${createdAt}`).put(picture).then((snapshot) => {
+            const imgurl = snapshot.metadata.downloadURLs[0];
+            event.pictureUrl = imgurl;
+            return database.ref(`users/${uid}/events`).push(event).then((ref) => {
               dispatch(addEvent({
                 id: ref.key,
                 ...event
               }));
-          }); 
+            });
+          });     
         }
     };
   };
@@ -118,24 +122,24 @@ export const setEvents = (events) => ({
     };
   };
 
-  export const setPublicEvents = (events) => ({
+  export const setPublicEvents = (publicEvents) => ({
     type: 'SET_PUBLIC_EVENTS',
-    events
+    publicEvents
   });
 
   export const startSetPublicEvents = () => {
     return (dispatch) => {
       return database.ref(`public_events`).once('value').then((snapshot) => {
-        const events = [];
+        const publicEvents = [];
   
         snapshot.forEach((childSnapshot) => {
-          events.push({
+          publicEvents.push({
             id: childSnapshot.key,
             ...childSnapshot.val()
           });
         });
   
-        dispatch(setPublicEvents(events));
+        dispatch(setPublicEvents(publicEvents));
       });
     };
   };

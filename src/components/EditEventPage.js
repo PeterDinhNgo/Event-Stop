@@ -7,9 +7,10 @@ import { WhatsappShareButton, WhatsappIcon, FacebookShareButton, FacebookIcon, T
 import Header from './Header';
 import { Container, Row, Col } from 'reactstrap';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-
+import axios from 'axios';
 
 export class EditEventPage extends React.Component {
+    
     onSubmit = (event) => {
         this.props.startEditEvent(this.props.event.id, event);
         this.props.history.push('/');
@@ -29,15 +30,15 @@ export class EditEventPage extends React.Component {
                 />
                
                
-                <Col m={{ size: 6, order: 2 }}>
+                <Col md={{ size: 12, order: 2 }} lg={{ size: 3, order: 2}}>
                     <Button onClick={this.onRemove} className="input-field__padder" color="danger">Remove</Button>
                 </Col>
                 <Col sm={{ size: 'auto', offset: 4 }}>  
-                    <div>
+                    {/* <div>
                     <FacebookShareButton children={<FacebookIcon />} url={`http://eventstop.herokuapp.com/edit/${this.props.event.id}`}/>
                     <WhatsappShareButton children={<WhatsappIcon />} url={`http://eventstop.herokuapp.com/edit/${this.props.event.id}`}/>
                     <TwitterShareButton children={<TwitterIcon />} url={`http://eventstop.herokuapp.com/edit/${this.props.event.id}`}/>
-                    </div>
+                    </div> */}
                 </Col>
                 </Container>    
                

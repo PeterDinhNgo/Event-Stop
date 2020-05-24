@@ -1,0 +1,35 @@
+.event-modal {
+
+}
+
+.event-modal_cards {
+    margin: 1rem 0.5rem 1rem 0.5rem;
+    font-size: $m-size;
+    font-weight: 550;
+    color: $cool-blue;
+    font-family: Brandon Grotesque,sans-serif;
+}
+
+.event-modal_cards_title {
+    font-size: 2rem;
+    font-weight: 750;
+    color: $cooler-blue;
+}
+
+.event-modal_cards_price {
+    color: $cool-blue;
+}
+
+.event-modal_image {
+   height: 35vh;
+   width:  auto;
+   object-fit: cover;
+   float: left;
+}
+
+.event-modal_tickets {
+    align-self: center;
+    margin-top: 0.2em;
+    text-transform: uppercase;
+    letter-spacing: 0.12rem;
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import LoggedInHeader from './LoggedInHeader';
+import Header from './Header';
 import { connect } from 'react-redux';
 import { firebase } from '../firebase/firebase';
 import { Container, Row, Col } from 'reactstrap';
@@ -9,6 +9,8 @@ import { InputGroup, InputGroupAddon, Input } from 'reactstrap';
 class UserProfile extends React.Component {
     constructor(props){
         super(props)
+
+      
 
         var user = firebase.auth().currentUser;
         const email = user.email;
@@ -21,8 +23,26 @@ class UserProfile extends React.Component {
             error: '',
             successAlert: '',
             successUpdateAlert: '',
-            oldPassword: ''
+            oldPassword: '',
+            center: {
+                latitude: '',
+                longitude: ''
+            }
         }
+        
+    }
+
+    componentDidMount() {
+        navigator.geolocation.getCurrentPosition((position) => {
+            this.setState({
+                center: {
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude
+                }
+            })
+            
+        })
+        
     }
 
     handleChange = (e) => {
@@ -88,8 +108,16 @@ class UserProfile extends React.Component {
         return (
             
             <div>
-            <LoggedInHeader />
+            
+            <Header />
+
+            
             <Form className="container" onSubmit={this.handleSubmit}>
+            <Col xs="6" sm={{size:6}} md={{size:10, offset: 2 }}>
+                {this.state.center.latitude && this.state.center.longitude ? 
+                <img  src={`https://maps.googleapis.com/maps/api/staticmap?center=${this.state.center.latitude},${this.state.center.longitude}&zoom=15&size=1080x320&sensor=false&markers=color:red%7C${this.state.center.latitude},${this.state.center.longitude}&key=AIzaSyDBrBu6qS8z4WX-Fe6U5ulBSMo-5PsxfMo`} alt=''/>: null}
+
+            </Col>
             <h1><Badge color="success">User Profile</Badge></h1>
             <FormGroup>
                 <Label for="email">Email</Label>

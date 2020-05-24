@@ -1,31 +1,45 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { signIn } from '../../actions/auth';
+import { NavLink } from 'react-router-dom';
+import { signIn, signInNoRemember } from '../../actions/auth';
 import history from "../../history";
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import { Alert } from 'reactstrap';
-import { Badge } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Alert, Badge, CustomInput } from 'reactstrap';
 import Cookies from 'js-cookie';
 
 
 export class SignInPage extends React.Component {
+
     state = {
-        email: Cookies.get('emailRemember') ? Cookies.get('emailRemember') : '',
-        password: ''
+        email: Cookies.get('email_rm') ? Cookies.get('email_rm') : '',
+        password: '',
+        checked: true
     }
+
     handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value
         })
+    };
+
+    handleCheck = (e) => {
+        this.setState({
+            checked: !this.state.checked
+        })
     }
+
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.signIn(this.state);
+        if(this.state.checked){
+            this.props.signInNoRemember(this.state);
+        } else if (!this.state.checked){
+            this.props.signIn(this.state);
+            Cookies.set('email_rm', this.state.email , { expires: 3});
+        }
         if(this.props.authError === null) {
             history.push('/dashboard')
         }
-       
-    }
+    };
+  
     
     render() {
         const { authError } = this.props; // check if authError exists on our component props
@@ -37,46 +51,21 @@ export class SignInPage extends React.Component {
                 <h1><Badge color="primary">Sign In</Badge></h1>
                 <FormGroup>
                     <Label for="email">Email</Label>
-                    <Input type="email" name="email" id="email" value={this.state.email !== '' ? this.state.email : null} placeholder="Enter Your Email" onChange={this.handleChange}/>
+                    <Input type="email" name="email" id="email" value={this.state.email} placeholder="Enter Your Email" onChange={this.handleChange}/>
                 </FormGroup>
                 <FormGroup>
                     <Label for="password">Password</Label>
-                    <Input type="password" name="password" id="password" placeholder="Enter Your Password" onChange={this.handleChange}/>
+                    <Input type="password" name="password" id="password" value={this.state.password} placeholder="Enter Your Password" onChange={this.handleChange}/>
                 </FormGroup>
-                
+                <FormGroup><CustomInput type="checkbox" id="checkbox" value={this.state.checked} onChange={this.handleCheck} label="Remember Me"/></FormGroup>
                 <Button color="primary" >Sign In</Button>
-                
-                    {/* <div className="input-field">
-                      <label htmlFor="email">Email</label>
-                      <input type="email" id="email" onChange={this.handleChange}/>
-                    </div>
-                    <div className="input-field">
-                      <label htmlFor="password">Password</label>
-                      <input type="password" id="password" onChange={this.handleChange}/>
-                    </div> */}
                         <div>
                                 { authError ? <Alert color="danger"><p >{ authError }</p></Alert>: ""}
                         </div>
-            
+                <NavLink to="/forgot">Forgot Password ?</NavLink>
                 </Form>
             </div>
-                /* <form onSubmit={this.handleSubmit} className="white">
-                    <h5 className="grey-text text-darken-3">Sign In</h5>
-                    <div className="input-field">
-                        <label htmlFor="email">Email</label>
-                        <input type="email" id="email" onChange={this.handleChange}/>
-                    </div>
-                    <div className="input-field">
-                        <label htmlFor="password">Password</label>
-                        <input type="password" id="password" onChange={this.handleChange}/>
-                    </div>
-                    <div className="input-field">
-                        <button className="btn pink lighten-1 z-depth-0">Login</button>
-                        <div className="red-text center">
-                            { authError ? <p>{authError}</p> : null}
-                        </div>
-                    </div>
-                </form> */
+               
             
         )
     };
@@ -84,7 +73,8 @@ export class SignInPage extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
     return { // this returned object represents what we want to attach to the props of this component.
-        signIn: (creds) => dispatch(signIn(creds))
+        signIn: (creds) => dispatch(signIn(creds)),
+        signInNoRemember: (creds) => dispatch(signInNoRemember(creds))
     }
 }
 
