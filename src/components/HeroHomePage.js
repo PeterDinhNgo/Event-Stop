@@ -31,11 +31,12 @@ const EventHomePage = () => (
             </Row> */}
             <div className="hero-layout">
                 <Row>
-                    <Col xs="4">
-                        <h1 className="image-slider__herotext">Schedule events and find public events to attend</h1>
-                        <p className="image-slider__herotext__underneath">Choose a day, choose a time and make it public or private.</p>
+                    <Col xs="12" lg="4">
+                        <h1 className="image-slider__herotext d-none d-lg-block">Schedule events and find public events to attend</h1>
+                        <h1 className="image-slider__herotext_mobile d-xs-block d-md-none">Explore and schedule events and push the boundaries of what's possible</h1>
+                        <p className="image-slider__herotext__underneath d-none d-lg-block">Choose a day, choose a time and make it public or private.</p>
                     </Col>
-                    <Col xs="8">
+                    <Col xs="12" lg="8">
                         <div className = 'image-slider'>
                             <EventImageSlider />
                         </div>
@@ -43,7 +44,7 @@ const EventHomePage = () => (
                 </Row>
             </div>
             <Row>
-                <Col xl={{size: 11, offset: 1}}><EventListFilters /></Col>
+                <Col lg="12"><EventListFilters /></Col>
                 <Col xs="12"><PublicEventsList /></Col>
             </Row>
         </Container>

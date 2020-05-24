@@ -31,7 +31,7 @@ export class EventListFilters extends React.Component {
           <Container>
           <Row>
           
-          <Col xs={{ size: 12, order: 1}} md={{ size: 6, order: 1 }} className="input-field__padder">
+          <Col xs="12" md="6" className="input-field__padder">
           <input
             className="input-field"
             type="text"
@@ -41,7 +41,7 @@ export class EventListFilters extends React.Component {
           />
     
           <select
-            className="input-field__dropdown"
+            className="input-field__dropdown d-none d-lg-inline-flex"
             value={this.props.filters.sortBy}
             onChange={this.onSortChange}
           >
@@ -50,7 +50,7 @@ export class EventListFilters extends React.Component {
           </select>
           </Col>
           
-          <Col xs={{size: 12, order: 2}} md={{ size: 6, order: 2 }} className="input-field__padder">
+          <Col xs={{size: 12, order: 2}} md={{ size: 6, order: 2 }} className="input-field__padder d-none d-lg-block">
           <DateRangePicker
             startDate={this.props.filters.startDate}
             endDate={this.props.filters.endDate}

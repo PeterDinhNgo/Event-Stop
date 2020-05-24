@@ -9,6 +9,7 @@ import { Button, Form, FormGroup, Label, Input, FormText, CustomInput } from 're
 import PreviewPicture from './PreviewPicture';
 import Dropzone from 'react-dropzone-uploader';
 import 'react-dropzone-uploader/dist/styles.css';
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 // Always use Moment for dates.
 const now = moment(); // We get back an instance of moment (an individual moment).
 console.log(now.format('Do MMMM YYYY'))
@@ -29,7 +30,8 @@ export default class EventForm extends React.Component {
                 checked: true,
                 public_event: props.event ? props.event.public_event : true,
                 picture: props.event? props.event.picture : null,
-                pictureUrl: props.event? props.event.pictureUrl : null
+                pictureUrl: props.event? props.event.pictureUrl : null,
+                address: props.event ? props.event.address : '',
         };
     }
      // State Object
@@ -107,6 +109,16 @@ export default class EventForm extends React.Component {
         //console.log(this.state.public_event)
     }
 
+    handleAddressChange = address => {
+        this.setState({ address });
+    };
+
+    handleAddressSelect = address => {
+        geocodeByAddress(address)
+          .then(results => getLatLng(results[0]))
+          .then(latLng => console.log('Success', latLng))
+          .catch(error => console.error('Error', error));
+    };
 
 
     // Setting up the handler
@@ -246,7 +258,42 @@ export default class EventForm extends React.Component {
                 </Col>
                   
                 </form>
-                <div>
+                <PlacesAutocomplete
+                    value={this.state.address}
+                    onChange={this.handleAddressChange}
+                    onSelect={this.handleAddressSelect}
+                >
+                    {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                        <div>
+                        <input
+                            {...getInputProps({
+                                placeholder: 'Search Places ...',
+                                className: 'location-search-input',
+                            })}
+                        />
+                        
+                        <div className="autocomplete-dropdown-container">
+                            {loading && <div>Loading...</div>}
+                            {suggestions.map(suggestion => {
+                                const className = suggestion.active ? 'suggestion-item--active' : 'suggestion-item';
+                                const style = suggestion.active ? { backgroundColor: '#fafafa', cursor: 'pointer' } : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                                return (
+                                    <div
+                                        {...getSuggestionItemProps(suggestion, {
+                                        className,
+                                        style,
+                                        })}
+                                    >
+                                    <span>{suggestion.description}</span>
+                                    </div>
+                                    );
+                                })}
+                                </div>
+                            </div>
+                        )}
+                        </PlacesAutocomplete>
+                
+                {/* <div>
                     <Label for="exampleCustomFileBrowser">File Browser</Label>
                     <CustomInput 
                         type="file" 
@@ -258,7 +305,7 @@ export default class EventForm extends React.Component {
                     <PreviewPicture 
                             pictureUrl = {this.state.pictureUrl}
                     />
-                </div>
+                </div> */}
                 {/* <Row>
                     <div class="input-group mb-3">
                         <input 
