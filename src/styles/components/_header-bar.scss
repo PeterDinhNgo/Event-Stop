@@ -14,6 +14,19 @@
 
 }
 
+.header-bar_hero {
+    box-shadow: 0 0 5px rgba(0,0,0,.13);
+    padding-right: 2.5vw;
+}
+
+.header-bar_hero_links {
+    text-decoration: none !important;
+    color: #17a2b8;
+    font-size: 2.65rem;
+    font-weight: 350;
+    margin-right: 4rem;
+}
+
 @media only screen and (min-width: 770px) {
     .header-bar__fix {
         top: 2.25rem;
