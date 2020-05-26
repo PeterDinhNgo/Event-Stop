@@ -5,7 +5,7 @@ import 'react-dates/lib/css/_datepicker.css';
 import TimeKeeper from 'react-timekeeper';
 import Switch from "react-switch";
 import { Container, Row, Col } from 'reactstrap';
-import { Button, Form, FormGroup, Label, Input, FormText, CustomInput } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, FormText, CustomInput, Badge } from 'reactstrap';
 import PreviewPicture from './PreviewPicture';
 import Dropzone from 'react-dropzone-uploader';
 import 'react-dropzone-uploader/dist/styles.css';
@@ -148,31 +148,41 @@ export default class EventForm extends React.Component {
         const { label, required, input } = this.props;
         return (
             
-            <div>
+            <div className="container">
                 {this.state.error && <p>{this.state.error}</p>}
-                <Row>
-                <PreviewPicture pictureUrl = {this.state.pictureUrl}/>
-                <Dropzone 
-                    onChangeStatus={this.handleChangeStatus}
-                    onSubmit={this.handleSubmit}
-                    accept="image/*"
-                    
-                    inputContent="Drag and Drop an Event Image"
-                    styles={{
-                        dropzone: { width: 400, height: 250 },
-                        dropzoneActive: { borderColor: 'green' },
-                    }}
-                />
+            <Row className="justify-content-center">
+            <Col xs="12" md="6" lg="8">
+            <h1 className="event-form_master"><Badge color="primary">Create Your Event</Badge></h1>
+            </Col>
             </Row>
-                <form onSubmit={this.onSubmit}>
-            <Row>
-                <Col sm={{size: 12, offset: 2}} md={{size: 12, offset: 3 }} lg={{size: 12, offset: 4}}>
+            <Row className="justify-content-center">
+
+                <Col xs="12" md="6" lg="8">
+                    <PreviewPicture pictureUrl = {this.state.pictureUrl}/>
+                    
+                    <Dropzone 
+                        
+                        onChangeStatus={this.handleChangeStatus}
+                        onSubmit={this.handleSubmit}
+                        accept="image/*"
+                        
+                        inputContent="Upload a Hero Event Image"
+                        
+                    />
+                    
+                </Col>
+            </Row>
+
+            <form onSubmit={this.onSubmit}>
+            <Row className="justify-content-center">
+                <Col xs="12" md="6" lg="8">
                 <div>
-                <h1>Event Title</h1>
+                
+                <h1 className="event-form_master"><Badge color="primary">Event Title</Badge></h1>
                 <input
-                    className="input-field-title"
+                    className="input-field"
                     type="text"
-                    placeholder="Title"
+                    placeholder="Short and Sweet"
                     autoFocus
                     value={this.state.description}
                     onChange={this.onDescriptionChange}
@@ -180,11 +190,11 @@ export default class EventForm extends React.Component {
                 </div>
                 
                 <div>
-                <h1>Ticket Price</h1>
+                <h1 className="event-form_master"><Badge color="primary">Ticket Price</Badge></h1>
                 <input
-                    className="input-field-price"
+                    className="input-field"
                     type="number"
-                    placeholder="Entry Cost"
+                    placeholder="$"
                     value={this.state.amount}
                     onChange={this.onAmountChange}
 
@@ -192,11 +202,39 @@ export default class EventForm extends React.Component {
                 </div>
                 </Col>
             </Row>
-            <Row>
-                <Col lg={{size: 12, offset: 4}}>
-                <h1>Event Description</h1>
+            <Row className="justify-content-center">
+            <Col xs="12" md="5" lg="4">
+                    
+                    <h1 className="event-form_master"><Badge color="primary">Event Time</Badge></h1>
+                    <TimeKeeper
+                        time={this.state.time}
+                        onChange={this.onTimeChange}
+                        switchToMinuteOnHourSelect={true}
+                        
+                    />
+                    
+                </Col>
+                <Col xs="12" md="5" lg="4">
+                    
+                    <h1 className="event-form_master"><Badge color="primary">Event Date</Badge></h1>
+                    <SingleDatePicker 
+                        date={this.state.createdAt}
+                        onDateChange={this.onDateChange}
+                        focused={this.state.calendarFocused}
+                        onFocusChange={this.onFocusChange}
+                        numberOfMonths={1}
+                        isOutsideRange={() => false}
+                    />
+                    
+                </Col>
+                
+                
+            </Row>
+            <Row className="justify-content-center">
+                <Col xs="12" md="6" lg="8">
+                <h1 className="event-form_master"><Badge color="primary">Event Description</Badge></h1>
                 <textarea
-                    className="input-field-description"
+                    className="input-field_create"
                     placeholder="Add a description for your event."
                     value={this.state.note}
                     onChange={this.onNoteChange}
@@ -204,38 +242,9 @@ export default class EventForm extends React.Component {
                 </textarea>
                 </Col>
             </Row>
-            
-            
-            <Row>
-            <Col>
-                <div>
-                <h1>Event Time</h1>
-                <TimeKeeper
-                    time={this.state.time}
-                    onChange={this.onTimeChange}
-                    switchToMinuteOnHourSelect={true}
-                    
-                />
-                </div>
-            </Col>
-            <Col>
-                <div>
-                <h1>Event Date</h1>
-                <SingleDatePicker 
-                    date={this.state.createdAt}
-                    onDateChange={this.onDateChange}
-                    focused={this.state.calendarFocused}
-                    onFocusChange={this.onFocusChange}
-                    numberOfMonths={1}
-                    isOutsideRange={() => false}
-                />
-                </div>
-                </Col>
-            </Row>
-           
-            <Row>
-                <Col>
-                <h2 className="input-field-public">Is this a Public Event?</h2>
+            <Row className="justify-content-center">
+                <Col xs="12" md="6" lg="8">
+                <h1 className="event-form_master"><Badge color="primary">Public Event?</Badge></h1>
                 <div>
                 <Switch 
                     checked={this.state.checked}   
@@ -244,84 +253,55 @@ export default class EventForm extends React.Component {
                 </div>
                 </Col>
             </Row>
-                {/* <TimePicker 
-                    hourPlaceholder="hh"
-                    minutePlaceholder="mm"
-                    
-                    onChange={this.onTimeChange}
-                    value={this.state.time}
-                /> */}
-                <Col m={{ size: 6, order: 1 }}>
-                <Button className="input-field__padder" color="info">
+
+            <Row className="justify-content-center">
+                <Col xs="12" md="6" lg="8">
+                <Button className="input-field__padder btn-block btn-lg" color="info">
                     Finish
                 </Button>
                 </Col>
-                  
-                </form>
-                <PlacesAutocomplete
-                    value={this.state.address}
-                    onChange={this.handleAddressChange}
-                    onSelect={this.handleAddressSelect}
-                >
-                    {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                        <div>
-                        <input
-                            {...getInputProps({
-                                placeholder: 'Search Places ...',
-                                className: 'location-search-input',
-                            })}
-                        />
-                        
-                        <div className="autocomplete-dropdown-container">
-                            {loading && <div>Loading...</div>}
-                            {suggestions.map(suggestion => {
-                                const className = suggestion.active ? 'suggestion-item--active' : 'suggestion-item';
-                                const style = suggestion.active ? { backgroundColor: '#fafafa', cursor: 'pointer' } : { backgroundColor: '#ffffff', cursor: 'pointer' };
-                                return (
-                                    <div
-                                        {...getSuggestionItemProps(suggestion, {
-                                        className,
-                                        style,
-                                        })}
-                                    >
-                                    <span>{suggestion.description}</span>
-                                    </div>
-                                    );
+            </Row>      
+            </form>
+            {/* <Row className="justify-content-center">
+                <Col xs="12" md="6" lg="8">
+                    <PlacesAutocomplete
+                        value={this.state.address}
+                        onChange={this.handleAddressChange}
+                        onSelect={this.handleAddressSelect}
+                    >
+                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                            <div>
+                            <input
+                                {...getInputProps({
+                                    placeholder: 'Search Places ...',
+                                    className: 'location-search-input',
                                 })}
+                            />
+                            
+                            <div className="autocomplete-dropdown-container">
+                                {loading && <div>Loading...</div>}
+                                {suggestions.map(suggestion => {
+                                    const className = suggestion.active ? 'suggestion-item--active' : 'suggestion-item';
+                                    const style = suggestion.active ? { backgroundColor: '#fafafa', cursor: 'pointer' } : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                                    return (
+                                        <div
+                                            {...getSuggestionItemProps(suggestion, {
+                                            className,
+                                            style,
+                                            })}
+                                        >
+                                        <span>{suggestion.description}</span>
+                                        </div>
+                                        );
+                                    })}
+                                    </div>
                                 </div>
-                            </div>
-                        )}
+                            )}
                         </PlacesAutocomplete>
-                
-                {/* <div>
-                    <Label for="exampleCustomFileBrowser">File Browser</Label>
-                    <CustomInput 
-                        type="file" 
-                        id="exampleCustomFileBrowser" 
-                        name="customFile" 
-                        {...input}
-                        onChange={(e) => {this.displayPicture(e);}}
-                    />
-                    <PreviewPicture 
-                            pictureUrl = {this.state.pictureUrl}
-                    />
-                </div> */}
-                {/* <Row>
-                    <div class="input-group mb-3">
-                        <input 
-                            type="file" 
-                            className="form-control" 
-                            {...input}
-                            onChange={(e) => {this.displayPicture(e);}} 
-                        />
-                        <PreviewPicture 
-                            pictureUrl = {this.state.pictureUrl}
-                        />
-                    </div>
-                </Row> */}
-                
-                
-            </div>
+                </Col>
+            </Row> */}
+
+        </div>
         
         )
     }

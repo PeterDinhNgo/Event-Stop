@@ -8,28 +8,27 @@ import { Container, Row, Col } from 'reactstrap';
 import { Button } from 'reactstrap';
 
 export const LoginPage = ({ startLogin }) => (
-    <div>
-    <Container>
-        <Row>
-        <div className="signup-spacing">
-            <Col><NavLink to="/" activeClassName="is-active" ><h1 className="font-size">Event Stop</h1></NavLink></Col>
-        </div>
+    <div className="container">
+        <Row className="justify-content-center">
+                <Col xs="12" md="6">
+                    <NavLink to="/" activeClassName="is-active" ><h1 className="authentication">Event Stop</h1></NavLink>
+                </Col>
         </Row>
-        <Row>
-            <div className = "signup-spacing__button">
-            <Col><NavLink to="/create_account" ><Button color="success">Create Account</Button></NavLink></Col>
-            </div>
+        <Row className="justify-content-center">
+            <Col xs="12" md="6">
+                    <NavLink to="/create_account" ><Button className="btn-lg btn-block signup-spacing__button" color="success">Create Account</Button></NavLink>
+            </Col>    
         </Row>
-        <Row>
-            <div className = "signup-spacing__button">
-                <Col><Button color="success" onClick={startLogin}>Continue with Google</Button></Col>
-            </div>
+        <Row className="justify-content-center">
+            <Col xs="12" md="6">
+                <Button className="btn-lg btn-block signup-spacing__button" color="success" onClick={startLogin}>Continue with Google</Button>
+            </Col>
         </Row>
-        <Row>
-            <SignInPage />
+        <Row className="justify-content-center">
+            <Col xs="12" lg="6">
+                <SignInPage />
+            </Col>
         </Row>
-    </Container>
-        
     </div>
 );
 

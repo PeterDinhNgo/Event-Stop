@@ -3,6 +3,7 @@ import EventForm from './EventForm'; //No need for {}brackets for class import o
 import { connect } from 'react-redux';
 import { startAddEvent } from '../actions/events';
 import Header from './Header';
+import { Badge } from 'reactstrap';
 
 export class AddEventPage extends React.Component {
     onSubmit = (event) => {
@@ -13,12 +14,12 @@ export class AddEventPage extends React.Component {
         return (
             <div>
                 <Header />
-                <h1>Add Event</h1>
+                
                 <EventForm
                     onSubmit={this.onSubmit}
                 />
-                
             </div>
+            
         );
     }
 }

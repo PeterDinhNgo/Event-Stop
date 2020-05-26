@@ -7,3 +7,23 @@
     color: #265675;
     font-size: 3rem;
 }
+
+.filter_group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: $m-size;
+    
+    @media (min-width: 45rem) {
+        flex-direction: row;
+        margin-bottom: $l-size;
+    }
+}
+
+.filter_group__input {
+    margin-bottom: $s-size;
+    
+    @media (min-width: 45rem) {
+        margin: 0 $s-size 0 0;
+    }
+}
+

@@ -1,0 +1,28 @@
+.event-form_master {
+    padding-top: 1.2rem;
+}
+
+.event-form_master_image {
+    width : 30% !important;
+    height : 30% !important;
+    border : 1px solid black;
+
+    @media (min-width: 45rem){
+        width: 100% !important;
+    }
+}
+
+.dzu-dropzone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 120px;
+    overflow: hidden;
+    margin: 0 auto;
+    position: relative;
+    box-sizing: border-box;
+    transition: all .15s linear;
+    border: 2px solid #d9d9d9;
+    border-radius: 4px;
+}

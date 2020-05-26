@@ -7,14 +7,12 @@ import { Navbar, Nav } from 'react-bootstrap';
 // Header-Bar Scss
 export const Header = ({ startLogout }) => (
     
-    <Navbar collapseOnSelect expand="lg"  className="header-bar">
+    <Navbar collapseOnSelect expand="lg"  className="header-bar_hero">
+        
         <Navbar.Brand bsPrefix="header-bar_logo" >Event Stop</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="mr-auto">
-                
-            </Nav>
-            <Nav>
+            <Nav className="ml-auto">
                 <Nav.Link href="/signed_in/home" className="header-bar_links">Discover</Nav.Link>
                 <Nav.Link href="/create" className="header-bar_links">Create Event</Nav.Link>
                 <Nav.Link href="/dashboard" className="header-bar_links">Manage</Nav.Link>
@@ -22,7 +20,9 @@ export const Header = ({ startLogout }) => (
                 <Nav.Link href="/" onClick={ startLogout } className="header-bar_logout">Log Out</Nav.Link>
             </Nav>
         </Navbar.Collapse>
+        
     </Navbar>
+    
 );
 
 const mapDispatchToProps = (dispatch) => ({

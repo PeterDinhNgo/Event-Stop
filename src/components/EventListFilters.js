@@ -41,7 +41,7 @@ export class EventListFilters extends React.Component {
           />
     
           <select
-            className="input-field__dropdown d-none d-lg-inline-flex"
+            className="input-field__dropdown d-none d-md-inline-flex"
             value={this.props.filters.sortBy}
             onChange={this.onSortChange}
           >

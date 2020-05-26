@@ -9,26 +9,17 @@ import { Navbar, Nav } from 'react-bootstrap';
 
 const EventHomePage = () => (
     <div>
-        <Navbar collapseOnSelect expand="lg" className="header-bar_hero">
+        <Navbar collapseOnSelect expand="lg" className="header-bar_hero sticky-top">
                 <Navbar.Brand bsPrefix="header-bar_logo" >Event Stop</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="ml-auto">
-                        <Nav.Link><NavLink to="/signin" className="header-bar_hero_links">Log In</NavLink></Nav.Link>
-                        <Nav.Link><NavLink to="/create_account" className="header-bar_hero_links">Sign Up</NavLink></Nav.Link>
+                        <NavLink to="/signin" className="header-bar_hero_links">Log In</NavLink>
+                        <NavLink to="/create_account" className="header-bar_hero_links">Sign Up</NavLink>
                     </Nav>
                 </Navbar.Collapse>
         </Navbar>
         <Container className="themed-container hero-layout" fluid={true}>
-            {/* <Row className="home">
-                <Col xs="8" >
-                    <h1 className="page-title">Event Stop</h1>
-                </Col>
-                <Col xs="4" className="home__spacing">
-                    <NavLink to="/signin"><button className="button">Log In</button></NavLink>
-                    <NavLink to="/create_account" ><button className="button">Sign Up</button></NavLink>
-                </Col>
-            </Row> */}
             <div className="hero-layout">
                 <Row>
                     <Col xs="12" lg="4">

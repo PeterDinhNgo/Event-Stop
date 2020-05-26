@@ -6,7 +6,7 @@ const PreviewPicture = (props) => {
     const { pictureUrl } = props;
     return (
         <div>
-            <img className="img-fluid mb-2 mt-2" src={pictureUrl}/>
+            <img className="img-fluid mb-2" src={pictureUrl}/>
         </div>
             
         

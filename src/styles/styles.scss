@@ -12,10 +12,12 @@
 @import './components/content-container';
 @import './components/Image-slider';
 @import './components/event-modal';
-
+@import './components/event-form';
 
 /* Pages */
 @import './components/home';
+@import './components/dashboard';
+@import './components/authentication';
 
 /* Fields */
 @import './components/filter-text';

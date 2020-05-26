@@ -10,8 +10,6 @@ class UserProfile extends React.Component {
     constructor(props){
         super(props)
 
-      
-
         var user = firebase.auth().currentUser;
         const email = user.email;
         const displayName = user.displayName;
@@ -113,12 +111,16 @@ class UserProfile extends React.Component {
 
             
             <Form className="container" onSubmit={this.handleSubmit}>
-            <Col xs="6" sm={{size:6}} md={{size:10, offset: 2 }}>
+            <Row className="justify-content-center"> 
+            <Col xs="6" md="10">
                 {this.state.center.latitude && this.state.center.longitude ? 
                 <img  src={`https://maps.googleapis.com/maps/api/staticmap?center=${this.state.center.latitude},${this.state.center.longitude}&zoom=15&size=1080x320&sensor=false&markers=color:red%7C${this.state.center.latitude},${this.state.center.longitude}&key=AIzaSyDBrBu6qS8z4WX-Fe6U5ulBSMo-5PsxfMo`} alt=''/>: null}
 
             </Col>
-            <h1><Badge color="success">User Profile</Badge></h1>
+            </Row>
+            <Row className="justify-content-center">
+            <Col md="6">
+            <h1 className="authentication_user_profile"><Badge color="success">User Profile</Badge></h1>
             <FormGroup>
                 <Label for="email">Email</Label>
                 <Input 
@@ -142,10 +144,16 @@ class UserProfile extends React.Component {
             </FormGroup>
             <Button color="primary" >Update</Button>
             {this.state.successUpdateAlert && <Alert color="success"><p>{this.state.successUpdateAlert}</p></Alert>}
-
+            </Col>
+            </Row>
             </Form>
+            
             <br />
+            
+            
             <Form className="container">
+            <Row className="justify-content-center">
+            <Col md="6">
             <FormGroup>
                 <Label for="password">Confirm New Password</Label>
                 <Input 
@@ -168,11 +176,15 @@ class UserProfile extends React.Component {
                 onChange={this.handleChange}
                 />
             </FormGroup>
+            
             { authError ? <Alert color="danger"><p>{ authError }</p></Alert> : ''}
             <Button color="danger" onClick={this.handlePasswordSubmit}>Change Password</Button>
             {this.state.error && <Alert color="danger"><p>{this.state.error}</p></Alert>}
             {this.state.successAlert && <Alert color="success"><p>{this.state.successAlert}</p></Alert>}
+                    </Col>
+                </Row>
             </Form>
+            
             
         </div>
         );

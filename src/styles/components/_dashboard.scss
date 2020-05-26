@@ -1,0 +1,27 @@
+.dashboard {
+    background: $background-blue;
+}
+
+.dashboard_card_title {
+    font-size: $f-m-size;
+    color: $cooler-blue;
+}
+
+.dashboard_card_date {
+    font-size: $f-s-size;
+}
+
+.dashboard_card_price {
+    font-size: $f-s-size;
+}
+
+.dashboard_card_edit {
+    font-size: $f-s-size;
+    color: $cool-blue;
+}
+
+.dashboard_charts {
+    margin: 0 1.8rem 4.2rem 1.2rem;
+    padding-top: 2rem;
+}
+

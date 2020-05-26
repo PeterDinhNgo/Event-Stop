@@ -39,34 +39,39 @@ export class SignInPage extends React.Component {
             history.push('/dashboard')
         }
     };
+
+    handleHistory = (e) => {
+        e.preventDefault();
+        if ('scrollRestoration' in window.history) { 
+            window.history.scrollRestoration = 'auto'; 
+            window.history.back();
+        }
+        
+    }
   
     
     render() {
         const { authError } = this.props; // check if authError exists on our component props
         return (
-            
-            <div className="container">
-                
+            <div>
                 <Form onSubmit={this.handleSubmit}>
-                <h1><Badge color="primary">Sign In</Badge></h1>
-                <FormGroup>
-                    <Label for="email">Email</Label>
-                    <Input type="email" name="email" id="email" value={this.state.email} placeholder="Enter Your Email" onChange={this.handleChange}/>
-                </FormGroup>
-                <FormGroup>
-                    <Label for="password">Password</Label>
-                    <Input type="password" name="password" id="password" value={this.state.password} placeholder="Enter Your Password" onChange={this.handleChange}/>
-                </FormGroup>
-                <FormGroup><CustomInput type="checkbox" id="checkbox" value={this.state.checked} onChange={this.handleCheck} label="Remember Me"/></FormGroup>
-                <Button color="primary" >Sign In</Button>
-                        <div>
+                    <FormGroup>
+                        <Label for="email">Email</Label>
+                        <Input className="form-control form-control-lg" type="email" name="email" id="email" value={this.state.email} placeholder="Enter Your Email" onChange={this.handleChange}/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="password">Password</Label>
+                        <Input className="form-control form-control-lg" type="password" name="password" id="password" value={this.state.password} placeholder="Enter Your Password" onChange={this.handleChange}/>
+                    </FormGroup>
+                    <FormGroup><CustomInput type="checkbox" id="checkbox" value={this.state.checked} onChange={this.handleCheck} label="Remember Me"/></FormGroup>
+                    <Button className="btn-lg btn-block" color="primary" >Sign In</Button>
+                            <div>
                                 { authError ? <Alert color="danger"><p >{ authError }</p></Alert>: ""}
-                        </div>
-                <NavLink to="/forgot">Forgot Password ?</NavLink>
+                            </div>
+                    <NavLink to="/forgot"><p className="authentication_forgot">Forgot Password ?</p></NavLink>
                 </Form>
-            </div>
-               
-            
+                <button className="btn btn-dark " onClick={this.handleHistory}>Go Back</button>
+                </div>
         )
     };
 };

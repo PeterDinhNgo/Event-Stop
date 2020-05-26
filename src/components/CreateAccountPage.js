@@ -4,18 +4,20 @@ import { NavLink } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
 
 const CreateAccountPage = () => (
-    <div>
+    
         <Container>
-            <Row>
-            <div className="signup-spacing">
-                <Col><NavLink to="/" activeClassName="is-active" ><h1>Event Stop</h1></NavLink></Col>
-            </div>
+            <Row className="justify-content-center">
+                <Col xs="12" md="6">
+                    <NavLink to="/" activeClassName="is-active"><h1 className="signup-spacing">Event Stop</h1></NavLink>
+                </Col>
             </Row>
-            <Row>
-                <Col><SignUpPage /></Col>
+            <Row className="justify-content-center">
+                <Col xs="12" md="6">
+                    <SignUpPage />
+                </Col>
             </Row>
         </Container>
-    </div>
+    
 );
 
 export default CreateAccountPage;

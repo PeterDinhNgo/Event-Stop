@@ -11,8 +11,8 @@ export const publicPrivateStat = ({ publicEventCount, eventCount }) => {
     const doughnutData = {
         datasets: [{
             data: [publicEventCount, eventCount - publicEventCount],
-            backgroundColor: ['rgb(168, 208, 230)', 'rgb(55, 71, 133)'],
-            borderColor: ['rgb(168, 208, 230)', 'rgb(55, 71, 133)'],
+            backgroundColor: ['rgba(42, 94, 133, 0.4)', 'rgb(54, 52, 53, 0.4)'],
+            borderColor: ['rgba(42, 94, 133, 1)', 'rgba(54, 52, 53, 1)'],
         },
     ],
         labels: ['Public Events', 'Private Events']
@@ -23,18 +23,19 @@ export const publicPrivateStat = ({ publicEventCount, eventCount }) => {
         datasets: [
                     {
                     label: 'Tickets Sold',
-                    backgroundColor: 'rgba(168, 208, 230,0.2)',
-                    borderColor: 'rgba(168, 208, 230,1)',
+                    backgroundColor: 'rgba(42, 94, 133, 0.2)',
+                    borderColor: 'rgba(42, 94, 133, 1)',
                     borderWidth: 1,
-                    hoverBackgroundColor: 'rgba(168, 208, 230,0.4)',
-                    hoverBorderColor: 'rgba(168, 208, 230,1)',
+                    hoverBackgroundColor: 'rgba(59, 227, 224,0.4)',
+                    hoverBorderColor: 'rgba(59, 227, 224,1)',
                     data: [65, 59, 80, 81, 56, 55, 40]
                     }
                 ]
     };
     
     return (
-        <div>
+        <div className="dashboard_charts">
+            <div className="container">
             <Row>
                 <Col xs="12" lg="6">
                     <Doughnut 
@@ -47,6 +48,7 @@ export const publicPrivateStat = ({ publicEventCount, eventCount }) => {
                     />
                 </Col>
             </Row>
+            </div>
         </div>
     );
 };

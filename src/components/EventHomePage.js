@@ -6,12 +6,13 @@ import PublicPrivateStat from './dashboard/publicPrivateStat';
 import Header from './Header';
 
 const EventHomePage = () => (
-    <div>
-        <Header />
+    <div><Header/>
+        <div className="dashboard">
         <PublicPrivateStat />
         <EventsSummary />
         <EventListFilters />
         <EventList />
+        </div>
     </div>
     
 );

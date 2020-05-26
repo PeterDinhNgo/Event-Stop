@@ -33,3 +33,41 @@
     text-transform: uppercase;
     letter-spacing: 0.12rem;
 }
+
+.event-modal_share {
+    margin: auto;
+    padding: 3rem 2rem 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+}
+
+.event-modal_checkout {
+    font-size: $f-m-size;
+    font-weight: 600;
+}
+
+.event-modal_description {
+    font-size: $f-s-size;
+    line-height: 2rem;
+    padding-bottom: 2rem; 
+    margin: 0 1rem 0 0.5rem;
+}
+
+.btn-success {
+    background-color: black !important;
+    border-color: black !important;
+}
+
+.btn-success:hover {
+    background-color: $cooler-blue !important;
+    border-color: $cooler-blue !important;
+}
+
+.badge-primary {
+    background-color: black !important;
+    border-color: black !important;
+}
+
+

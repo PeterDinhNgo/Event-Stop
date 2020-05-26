@@ -74,24 +74,25 @@ export class SignUpPage extends React.Component {
                     <h1><Badge color="primary">Create an Account</Badge></h1>
                     <FormGroup>
                         <Label for="exampleEmail">Email</Label>
-                        <Input type="email" name="email" id="email" placeholder="Enter Your Email" onChange={this.handleChange}/>
+                        <Input className="form-control form-control-lg" type="email" name="email" id="email" placeholder="Enter Your Email" onChange={this.handleChange}/>
                     </FormGroup>
                     <FormGroup>
                         <Label for="examplePassword">Password</Label>
-                        <Input type="password" name="password" id="password" placeholder="Choose a Password" onChange={this.handleChange}/>
+                        <Input className="form-control form-control-lg" type="password" name="password" id="password" placeholder="Choose a Password" onChange={this.handleChange}/>
                     </FormGroup>
                     <div>
                         { authError ? <Alert color="danger"><p>{ authError }</p></Alert> : <Alert color="info"><p>Please Verify Your Email After Signup! </p></Alert>}
                     </div>
-                    <Button>Sign Up</Button>
+                    <Button color="success" className="authentication_signup btn-block btn-lg">Sign Up</Button>
                 </Form>
-                
+                <div className="authentication_captcha">
                     <Recaptcha 
                         sitekey="6LezdvAUAAAAAAWmg5D43zI9BJBHSgE18JfZpvEn"
                         render="explicit"
                         verifyCallback={this.verifyCallback}
                         onloadCallback={this.recaptchaLoaded}
                     />
+                </div>
             </div>
         )
     }

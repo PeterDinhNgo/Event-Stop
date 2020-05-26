@@ -4,14 +4,14 @@ import PublicEventItem from './PublicEventItem';
 import getVisibleEvents from '../../selectors/selectEvents';
 import { startSetPublicEvents } from '../../actions/events';
 import axios from 'axios';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Card, Row, Col } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Card, Row, Col, Badge } from 'reactstrap';
 import moment from 'moment';
 import PreviewPicture from '../PreviewPicture';
 import StripeCheckout from 'react-stripe-checkout';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { WhatsappShareButton, WhatsappIcon, FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon } from 'react-share';
-
+import numeral from 'numeral';
 
 toast.configure();
 
@@ -92,13 +92,12 @@ export class PublicEventsList extends React.Component {
             {
                 this.props.events.length === 0 ? ( <h1 className = "filter-text">No events</h1> ) : (
                 this.props.events.map((event) => {
-                    return <div key={event.id} className="col-xl-3">
+                    return <div key={event.id} className="col-xl-3 col-md-4">
                                 <Card className="event-modal_cards shadow p-3 mb-5 bg-white rounded">
                                     <div className="card-body">
                                         <PublicEventItem key={event.id} {...event} />
-                                        {/* <button className="event-modal_tickets" value={event.id} onClick={this.openInfoPage}>Buy Tickets</button> */}
                                         <div className="text-center event-modal_tickets">
-                                        <Button className="event-modal_tickets" size="lg" color="info" value={event.id} onClick={this.openInfoPage}>Buy Tickets</Button>
+                                            <Button className="event-modal_tickets" size="lg" color="info" value={event.id} onClick={this.openInfoPage}>Buy Tickets</Button>
                                         </div>
                                     </div>
                                 </Card>
@@ -108,21 +107,14 @@ export class PublicEventsList extends React.Component {
                 </div>
                 
             {this.state.modal ?  <Modal isOpen={this.state.modal} toggle={this.toggle} id={this.state.title}>
-                                    <ModalHeader toggle={this.toggle}>{this.state.title}</ModalHeader>
+                                    <ModalHeader toggle={this.toggle}><h1>{this.state.title}</h1></ModalHeader>
                                         <PreviewPicture pictureUrl={this.state.pictureUrl}/>
                                             <ModalBody>
-                                                <h1>${this.state.amount}.00</h1>
-                                                <h2>{this.state.date}</h2>
-                                                <h3>{this.state.note}</h3>
-                                                <Button color="primary" onClick={this.toggle}>View</Button>
+                                                <h1><Badge color="primary">{numeral(this.state.amount).format('$0,0.00')}</Badge></h1>
+                                                <h2>{moment(this.state.date).format("ddd, MMM  DD")}, {this.state.time}</h2>
+                                                <p className="event-modal_description">{this.state.note}</p>
+                                                
                                                 <div>
-                                                    <FacebookShareButton children={<FacebookIcon />} url={`https://eventstop.herokuapp.com/viewer/${this.state.id}`}/>
-                                                    <WhatsappShareButton children={<WhatsappIcon />} url={`https://eventstop.herokuapp.com/viewer/${this.state.id}`}/>
-                                                    <TwitterShareButton children={<TwitterIcon />} url={`https://eventstop.herokuapp.com/viewer/${this.state.id}`}/>
-                                                </div>
-                                            </ModalBody>
-                                            <ModalFooter>
-                                            
                                                 <StripeCheckout 
                                                     stripeKey="pk_test_bIqMrvHAd2maXEcg6FEofAQv000aRl1aC6"
                                                     token={this.handleToken}
@@ -130,7 +122,27 @@ export class PublicEventsList extends React.Component {
                                                     name="test"
                                                     billingAddress
                                                     shippingAddress
-                                                />
+                                                    
+                                                ><button className="btn btn-success btn-block btn-lg"><h2>Pay With Card</h2></button></StripeCheckout>
+                                                    
+                                                </div>
+                                            </ModalBody>
+                                            <ModalFooter>
+                                            <div className="mx-auto">
+                                            {/* <Button color="secondary" onClick={this.toggle}>Close</Button> */}
+                                            <FacebookShareButton children={<FacebookIcon />} url={`https://eventstop.herokuapp.com/viewer/${this.state.id}`}/>
+                                            <WhatsappShareButton children={<WhatsappIcon />} url={`https://eventstop.herokuapp.com/viewer/${this.state.id}`}/>
+                                            <TwitterShareButton children={<TwitterIcon />} url={`https://eventstop.herokuapp.com/viewer/${this.state.id}`}/>
+                                            </div>
+                                            
+                                                {/* <StripeCheckout 
+                                                    stripeKey="pk_test_bIqMrvHAd2maXEcg6FEofAQv000aRl1aC6"
+                                                    token={this.handleToken}
+                                                    amount={this.state.product.price * 100}
+                                                    name="test"
+                                                    billingAddress
+                                                    shippingAddress
+                                                /> */}
                                             </ModalFooter>
                                 </Modal>: null}
                 

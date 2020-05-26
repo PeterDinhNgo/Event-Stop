@@ -23,24 +23,19 @@ export class EditEventPage extends React.Component {
         return (
             <div>
                 <Header />
-                <Container>
+                
                 <EventForm
                     event={this.props.event}
                     onSubmit={this.onSubmit}
                 />
-               
-               
-                <Col md={{ size: 12, order: 2 }} lg={{ size: 3, order: 2}}>
-                    <Button onClick={this.onRemove} className="input-field__padder" color="danger">Remove</Button>
-                </Col>
-                <Col sm={{ size: 'auto', offset: 4 }}>  
-                    {/* <div>
-                    <FacebookShareButton children={<FacebookIcon />} url={`http://eventstop.herokuapp.com/edit/${this.props.event.id}`}/>
-                    <WhatsappShareButton children={<WhatsappIcon />} url={`http://eventstop.herokuapp.com/edit/${this.props.event.id}`}/>
-                    <TwitterShareButton children={<TwitterIcon />} url={`http://eventstop.herokuapp.com/edit/${this.props.event.id}`}/>
-                    </div> */}
-                </Col>
-                </Container>    
+               <div className="container">
+                <Row className="justify-content-center">
+                    <Col xs="12" md="6" lg="8">
+                        <Button onClick={this.onRemove} className="input-field__padder btn-block btn-lg" color="danger">Remove</Button>
+                    </Col>
+                </Row>
+                </div>   
+                  
                
             </div>
         )

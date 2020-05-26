@@ -1,20 +1,15 @@
 .input-field {
     border: 1px solid #cacccd;
     height: 50px;
-    width: 65%;
+    width: 70%;
     padding: 1.2rem;
-    font-size: 2.8rem;
+    font-size: 1.5rem;
     font-weight: 350;
 }
 
 .input-field__dropdown {
-    height: 50px;
-    padding: 1.1rem;
-    width: 35%;
-    font-size: 2rem;
-    font-weight: 350;
-    border: 1px solid #cacccd;
-    vertical-align: bottom;
+    @extend .input-field;
+    width: 30%
 }
 
 .input-field__padder {
@@ -38,4 +33,10 @@
 
 .input-field-public {
     margin: 2rem 0;
+}
+
+.input-field_create {
+    @extend .input-field;
+    height: 300px;
+    width: 100%;
 }
