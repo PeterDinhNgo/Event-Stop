@@ -40,8 +40,9 @@ export const startAddEvent = (eventData = {}) => {
           //console.log(imgurl);
           event.pictureUrl = imgurl;
 
-          return database.ref(`public_events`).push(event) && database.ref(`users/${uid}/events`).push(event).then((ref) => {
-
+          return database.ref(`users/${uid}/events`).push(event).then((ref) => {
+            const identity = ref.key;
+            database.ref(`public_events/${identity}`).push(event)
             dispatch(addEvent({
               id: ref.key,
               ...event
@@ -75,7 +76,7 @@ export const removeEvent = ({ id }={}) => ({
 export const startRemoveEvent = ({ id } = {}) => {
     return (dispatch, getState) => {
         const uid = getState().auth.uid;
-        return database.ref(`users/${uid}/events/${id}`).remove().then(() => {
+        return database.ref(`public_events/${id}`).remove() && database.ref(`users/${uid}/events/${id}`).remove().then(() => {
             dispatch(removeEvent({ id }));
         });
     };

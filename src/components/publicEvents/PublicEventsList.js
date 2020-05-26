@@ -107,7 +107,7 @@ export class PublicEventsList extends React.Component {
                 </div>
                 
             {this.state.modal ?  <Modal isOpen={this.state.modal} toggle={this.toggle} id={this.state.title}>
-                                    <ModalHeader toggle={this.toggle}><h1>{this.state.title}</h1></ModalHeader>
+                                        <ModalHeader toggle={this.toggle}>{this.state.title}</ModalHeader>
                                         <PreviewPicture pictureUrl={this.state.pictureUrl}/>
                                             <ModalBody>
                                                 <h1><Badge color="primary">{numeral(this.state.amount).format('$0,0.00')}</Badge></h1>
