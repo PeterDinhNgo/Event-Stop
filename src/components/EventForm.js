@@ -12,7 +12,7 @@ import 'react-dropzone-uploader/dist/styles.css';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 // Always use Moment for dates.
 const now = moment(); // We get back an instance of moment (an individual moment).
-console.log(now.format('Do MMMM YYYY'))
+
 
 
 export default class EventForm extends React.Component {

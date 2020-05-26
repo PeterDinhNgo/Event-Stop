@@ -92,9 +92,36 @@ export const editEvent = (id, updates) => ({ //implicitly return an object
 export const startEditEvent = (id, updates) => {
     return (dispatch, getState) => {
         const uid = getState().auth.uid;
-        return database.ref(`users/${uid}/events/${id}`).update(updates).then(() => {
+        const createdAt = updates.createdAt;
+        const picture = updates.picture;
+        
+        if(!picture){
+          return database.ref(`users/${uid}/events/${id}`).update({ amount: updates.amount, 
+                                                                    createdAt: updates.createdAt, 
+                                                                    description: updates.description,
+                                                                    note: updates.note,
+                                                                    public_event: updates.public_event,
+                                                                    time: updates.time
+                                                                    }).then(() => {
             dispatch(editEvent(id, updates));
-        })
+          })
+        } else {
+          storage.child(`users/${uid}/${createdAt}`).put(picture).then((snapshot) => {
+            const imgurl = snapshot.metadata.downloadURLs[0];
+            updates.pictureUrl = imgurl;
+            
+            return database.ref(`users/${uid}/events/${id}`).update({ amount: updates.amount, 
+              createdAt: updates.createdAt, 
+              description: updates.description,
+              note: updates.note,
+              public_event: updates.public_event,
+              time: updates.time,
+              pictureUrl: updates.pictureUrl
+              }).then(() => {
+              dispatch(editEvent(id, updates));
+            })
+          })
+        } 
     }
 }
 
