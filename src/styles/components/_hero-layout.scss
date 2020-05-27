@@ -14,3 +14,56 @@
     max-width: none;
     padding: 1.2rem;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand');
+
+
+.hero-layout_title {
+    font-family: 'Quicksand', sans-serif;
+    margin-bottom: 3rem;
+    margin-top: 2rem;
+    color: rgb(0, 59, 143);
+    font-size: 7.5rem;
+    line-height: 9rem;
+    font-weight: 900;
+}
+
+.hero-layout_small_title {
+    font-family: 'Quicksand', sans-serif;
+    margin-bottom: 3rem;
+    color: $cool-blue;
+    font-size: 3.2rem;
+    line-height: 4rem;
+    font-weight: 400;
+}
+
+.hero-layout_mobile_title {
+    @extend .hero-layout_title;
+    font-size: 4.2rem;
+    line-height: 5rem;
+    margin-bottom: 1.2rem;
+}
+
+.hero-layout_modal_title {
+    font-family: 'Quicksand', sans-serif;
+    color: rgb(0, 59, 143);
+    font-size: 2.2rem;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    letter-spacing: 0.2rem;
+}
+
+.btn-info {
+    background-color: rgb(0, 59, 143) !important;
+    border-color: rgb(0, 59, 143) !important;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 800;
+}
+
+.hero-layout_modal_timetitle {
+    white-space: nowrap;
+    overflow: hidden;
+    padding-top: 0.3rem;
+
+}

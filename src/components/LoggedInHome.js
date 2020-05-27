@@ -8,7 +8,7 @@ import Header from './Header';
 import { NavLink } from 'react-router-dom';
 
 const LoggedInHome = () => (
-    <div><Header />
+    <div className="dashboard"><Header />
     <div className="hero-layout">
         <div className="container-fluid">
             <div className="hero-layout">  

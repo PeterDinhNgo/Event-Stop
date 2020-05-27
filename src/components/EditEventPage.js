@@ -21,7 +21,7 @@ export class EditEventPage extends React.Component {
     };
     render() {
         return (
-            <div>
+            <div >
                 <Header />
                 
                 <EventForm

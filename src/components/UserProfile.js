@@ -105,7 +105,7 @@ class UserProfile extends React.Component {
         
         return (
             
-            <div>
+            <div className="dashboard">
             
             <Header />
 

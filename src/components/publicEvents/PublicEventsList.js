@@ -97,7 +97,7 @@ export class PublicEventsList extends React.Component {
                                     <div className="card-body">
                                         <PublicEventItem key={event.id} {...event} />
                                         <div className="text-center event-modal_tickets">
-                                            <Button className="event-modal_tickets" size="lg" color="info" value={event.id} onClick={this.openInfoPage}>Buy Tickets</Button>
+                                            <Button className="btn event-modal_tickets btn-block" size="lg" color="info" value={event.id} onClick={this.openInfoPage}>Buy Tickets</Button>
                                         </div>
                                     </div>
                                 </Card>
@@ -111,7 +111,7 @@ export class PublicEventsList extends React.Component {
                                         <PreviewPicture pictureUrl={this.state.pictureUrl}/>
                                             <ModalBody>
                                                 <h1><Badge color="primary">{numeral(this.state.amount).format('$0,0.00')}</Badge></h1>
-                                                <h2>{moment(this.state.date).format("ddd, MMM  DD")}, {this.state.time}</h2>
+                                                <h2>{moment(this.state.date).format("ddd, MMM  DD")}, {this.state.time} UTC</h2>
                                                 <p className="event-modal_description">{this.state.note}</p>
                                                 
                                                 <div>

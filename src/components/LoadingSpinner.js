@@ -4,10 +4,12 @@ import BeatLoader from "react-spinners/BeatLoader";
  
 // Can be a string as well. Need to ensure each key-value pair ends with ;
 const override = css`
-  display: block;
-  text-align: center;
-  margin: 25vh auto;
-  border-color: #000cdd
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-color: #000cdd;
+  height: 100vh;
+  width: 100wh;
 `;
  
 export class LoadingSpinner extends React.Component {

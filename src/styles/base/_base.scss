@@ -10,7 +10,7 @@ html {
 body {
     font-family: Helvetica, Arial, sans-serif;
     font-size: $m-size;
-
+    
 }
 
 button {
@@ -23,4 +23,9 @@ button:disabled {
 
 .is-active {
     font-weight: bold;
+}
+
+.footer {
+    min-height: 100vh;
+    background-color: $background-blue;
 }

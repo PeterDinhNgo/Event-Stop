@@ -12,7 +12,7 @@ export class AddEventPage extends React.Component {
     };
     render() {
         return (
-            <div>
+            <div >
                 <Header />
                 
                 <EventForm
