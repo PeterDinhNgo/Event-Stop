@@ -9,7 +9,32 @@ import { NavLink } from 'react-router-dom';
 
 const LoggedInHome = () => (
     <div className="dashboard"><Header />
-    <div className="hero-layout">
+    
+        <div className="container">
+                <Row>
+                    <Col xs="12" md="4" lg="4" className="align-self-center"> 
+                        <h1 className="hero-layout_title d-none d-md-block">Virtual Events. Exclusive Access.</h1>
+                        <h1 className="hero-layout_mobile_title d-xs-block d-md-none">Virtual Events. Exclusive Access.</h1>
+                        <p className="hero-layout_small_title d-none d-lg-block">Choose a day, choose a time and choose a streaming platform.</p>
+                    </Col>
+                    <Col xs="12" md="8" lg="8">
+                        <div className = "align-self-center">
+                            <img src="/images/wfh_3.svg"></img>
+                        </div>
+                    </Col>
+                    
+                </Row>
+                <Row className="justify-content-center">
+                    <Col xs="12" md="12" lg="12"><EventListFilters/></Col>
+                    
+                </Row>
+ 
+        </div>
+                    
+        <PublicEventsList/>
+       
+        
+    {/* <div className="hero-layout">
         <div className="container-fluid">
             <div className="hero-layout">  
                 <Row>
@@ -37,7 +62,7 @@ const LoggedInHome = () => (
                 </Row>
             </div>
         </div> 
-    </div>
+    </div> */}
     </div>
 );
 

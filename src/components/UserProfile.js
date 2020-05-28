@@ -30,18 +30,18 @@ class UserProfile extends React.Component {
         
     }
 
-    componentDidMount() {
-        navigator.geolocation.getCurrentPosition((position) => {
-            this.setState({
-                center: {
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude
-                }
-            })
+    // componentDidMount() {
+    //     navigator.geolocation.getCurrentPosition((position) => {
+    //         this.setState({
+    //             center: {
+    //                 latitude: position.coords.latitude,
+    //                 longitude: position.coords.longitude
+    //             }
+    //         })
             
-        })
+    //     })
         
-    }
+    // }
 
     handleChange = (e) => {
         this.setState({
@@ -111,13 +111,13 @@ class UserProfile extends React.Component {
 
             
             <Form className="container" onSubmit={this.handleSubmit}>
-            <Row className="justify-content-center"> 
+            {/* <Row className="justify-content-center"> 
             <Col xs="6" md="10">
                 {this.state.center.latitude && this.state.center.longitude ? 
                 <img  src={`https://maps.googleapis.com/maps/api/staticmap?center=${this.state.center.latitude},${this.state.center.longitude}&zoom=15&size=1080x320&sensor=false&markers=color:red%7C${this.state.center.latitude},${this.state.center.longitude}&key=AIzaSyDBrBu6qS8z4WX-Fe6U5ulBSMo-5PsxfMo`} alt=''/>: null}
 
             </Col>
-            </Row>
+            </Row> */}
             <Row className="justify-content-center">
             <Col md="6">
             <h1 className="authentication_user_profile"><Badge color="success">User Profile</Badge></h1>

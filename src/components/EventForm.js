@@ -10,10 +10,12 @@ import PreviewPicture from './PreviewPicture';
 import Dropzone from 'react-dropzone-uploader';
 import 'react-dropzone-uploader/dist/styles.css';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // Always use Moment for dates.
 const now = moment(); // We get back an instance of moment (an individual moment).
 
-
+toast.configure();
 
 export default class EventForm extends React.Component {
     constructor(props) {
@@ -36,7 +38,11 @@ export default class EventForm extends React.Component {
     }
      // State Object
     handleChangeStatus = ({ meta, file }, status) => { 
-        //console.log(status, meta, file)     
+        
+        if(status === "done"){
+            toast('Image Upload Complete! Press Submit.', { position: "top-center", type: 'dark', autoClose: 7000 })
+        }
+        
     }
     
     handleSubmit = (files) => {
@@ -235,7 +241,7 @@ export default class EventForm extends React.Component {
                 <h1 className="event-form_master"><Badge color="primary">Event Description</Badge></h1>
                 <textarea
                     className="input-field_create"
-                    placeholder="Add a description for your event."
+                    placeholder="Add a description for your event and streaming platform. (e.g. Google Hangouts)"
                     value={this.state.note}
                     onChange={this.onNoteChange}
                 >

@@ -19,7 +19,7 @@ const EventHomePage = () => (
                     </Nav>
                 </Navbar.Collapse>
         </Navbar>
-        <Container className="themed-container hero-layout" fluid={true}>
+        <Container className="themed-container dashboard" fluid={true}>
         <div className="container">
                 <Row>
                     <Col xs="12" md="4" lg="4" className="align-self-center"> 

@@ -1,4 +1,4 @@
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import database from '../firebase/firebase';
 import { storage } from '../firebase/firebase';
 
@@ -34,19 +34,27 @@ export const startAddEvent = (eventData = {}) => {
       const event = { description, note, amount, createdAt, time, public_event, picture, pictureUrl };
       
       if (event.public_event === true) {
-        storage.child(`users/${uid}/${createdAt}`).put(picture).then((snapshot) => {
-          //console.log('Uploaded a blob or file!');
+        storage.child(`users/${uid}/${uuidv4()}`).put(picture).then((snapshot) => {
           const imgurl = snapshot.metadata.downloadURLs[0];
-          //console.log(imgurl);
           event.pictureUrl = imgurl;
-
           return database.ref(`users/${uid}/events`).push(event).then((ref) => {
-            const identity = ref.key;
-            database.ref(`public_events/${identity}`).push(event)
+            const test = ref.key;
+            //console.log(test);
+            database.ref(`/public_events/`).push({
+              description: event.description,
+              note: event.note,
+              amount: event.amount,
+              createdAt: event.createdAt,
+              time: event.time,
+              public_event: event.public_event,
+              pictureUrl: event.pictureUrl,
+              remember: test
+             });
             dispatch(addEvent({
               id: ref.key,
               ...event
             }));
+            
           }).catch((e) => {
             console.log(e);
           })
@@ -76,7 +84,16 @@ export const removeEvent = ({ id }={}) => ({
 export const startRemoveEvent = ({ id } = {}) => {
     return (dispatch, getState) => {
         const uid = getState().auth.uid;
-        return database.ref(`public_events/${id}`).remove() && database.ref(`users/${uid}/events/${id}`).remove().then(() => {
+        console.log(id);
+        database.ref('public_events').orderByChild(`remember`).equalTo(`${id}`).on("value", (snapshot) => {
+          console.log(snapshot.val());
+          
+          snapshot.forEach((data) => {
+            const deletionID = data.key; // ID
+            return database.ref(`public_events/${deletionID}`).remove()
+          })
+        })
+        return database.ref(`users/${uid}/events/${id}`).remove().then(() => {
             dispatch(removeEvent({ id }));
         });
     };
@@ -107,7 +124,7 @@ export const startEditEvent = (id, updates) => {
             dispatch(editEvent(id, updates));
           })
         } else {
-          storage.child(`users/${uid}/${createdAt}`).put(picture).then((snapshot) => {
+          storage.child(`users/${uid}/${uuidv4()}`).put(picture).then((snapshot) => {
             const imgurl = snapshot.metadata.downloadURLs[0];
             updates.pictureUrl = imgurl;
             

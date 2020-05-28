@@ -88,12 +88,14 @@ export class PublicEventsList extends React.Component {
         
         return(
             <div>
+            
                 <div className="row" >
+                
             {
-                this.props.events.length === 0 ? ( <h1 className = "filter-text">No events</h1> ) : (
+                this.props.events.length === 0 ? ( <h1 className = "filter-text_public">Sorry! No Events.</h1> ) : (
                 this.props.events.map((event) => {
-                    return <div key={event.id} className="col-xl-3 col-md-4">
-                                <Card className="event-modal_cards shadow p-3 mb-5 bg-white rounded">
+                    return <div key={event.id} className="col-lg-4 col-md-6">
+                                <Card className="event-modal_cards shadow p-3 mb-5 rounded">
                                     <div className="card-body">
                                         <PublicEventItem key={event.id} {...event} />
                                         <div className="text-center event-modal_tickets">
@@ -111,7 +113,7 @@ export class PublicEventsList extends React.Component {
                                         <PreviewPicture pictureUrl={this.state.pictureUrl}/>
                                             <ModalBody>
                                                 <h1><Badge color="primary">{numeral(this.state.amount).format('$0,0.00')}</Badge></h1>
-                                                <h2>{moment(this.state.date).format("ddd, MMM  DD")}, {this.state.time} UTC</h2>
+                                                <h2>{moment(this.state.date).format("ddd, MMM  DD")}, {this.state.time}</h2>
                                                 <p className="event-modal_description">{this.state.note}</p>
                                                 
                                                 <div>
